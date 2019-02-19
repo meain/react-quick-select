@@ -14,6 +14,7 @@ export type Props = {
   width?: string;
   renderer: (option: Option) => React.ReactNode;
   trigger?: (option: Option) => React.ReactNode;
+  onSelect?: (option: Option, index: number) => void;
 };
 type State = {
   hover: boolean;
@@ -35,6 +36,12 @@ export default class QuickSelect extends React.Component<Props, State> {
 
   toggleHover(hover: boolean) {
     this.setState({ ...this.state, hover });
+  }
+
+  onItemSelect(event: React.MouseEvent<HTMLElement>, i: number) {
+    event.stopPropagation();
+    const { options, onSelect = () => {} } = this.props;
+    onSelect(options[i], i);
   }
 
   render() {
@@ -72,7 +79,11 @@ export default class QuickSelect extends React.Component<Props, State> {
         </div>
         <div className={styles.items} style={style}>
           {options.map((option, i) => (
-            <div key={i} className={styles.item}>
+            <div
+              key={i}
+              className={styles.item}
+              onClick={e => this.onItemSelect(e, i)}
+            >
               {renderer(option)}
             </div>
           ))}

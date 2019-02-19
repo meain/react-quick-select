@@ -12,6 +12,14 @@ const range = (lowEnd, highEnd) => {
 };
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      number: 0,
+      color: 0
+    };
+  }
+
   optionRenderer(option) {
     return <b style={{ margin: "0 10px" }}>{option.label}</b>;
   }
@@ -46,17 +54,24 @@ export default class App extends Component {
           My favorite number is
           <QuickSelect
             options={numberOptions}
-            selected={0}
-            height='500px'
-            width='300px'
+            selected={this.state.number}
+            height="500px"
+            width="300px"
             trigger={this.optionRenderer}
+            onSelect={(o, i) => {
+              console.log(i);
+              this.setState({ ...this.state, number: i });
+            }}
           />
           and my favorite color is
           <QuickSelect
             options={colorOptions}
-            selected={0}
+            selected={this.state.color}
             trigger={this.optionRenderer}
             renderer={this.colorRenderer}
+            onSelect={(o, i) => {
+              this.setState({ ...this.state, color: i });
+            }}
           />
         </div>
       </div>
