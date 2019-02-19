@@ -2,8 +2,11 @@
 
 > Quick select word(s) with an inline like completion
 
+
 [![NPM](https://img.shields.io/npm/v/react-quick-select.svg)](https://www.npmjs.com/package/react-quick-select)
 ![Pretter](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)
+
+### Demo at [meain.io/react-quick-select](https://meain.io/react-quick-select)
 
 ## Install
 
