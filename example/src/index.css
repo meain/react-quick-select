@@ -3,7 +3,7 @@ body {
   padding: 0;
   width: 100vw;
   height: 100vh;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-family: "Operator Mono", "Fira Code", monaco, sans-serif;
   display: flex;
   justify-content: center;
