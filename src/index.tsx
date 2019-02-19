@@ -65,6 +65,7 @@ export default class QuickSelect extends React.Component<Props, State> {
 
     const style: React.CSSProperties = {};
     if (hover) {
+      style.overflow = 'auto';
       style.maxHeight = height;
       if (width) style.width = width;
     }
