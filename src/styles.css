@@ -22,12 +22,7 @@
 }
 
 .wrapper:hover .items {
-  /* max-height: 200px; */
   overflow: auto;
-}
-
-.wrapper:hover .trigger {
-  opacity: 0.3;
 }
 
 .item:hover {

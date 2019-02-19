@@ -39,6 +39,7 @@ export default class QuickSelect extends React.Component<Props, State> {
   }
 
   onItemSelect(event: React.MouseEvent<HTMLElement>, i: number) {
+    this.setState({...this.state, hover: false})
     event.stopPropagation();
     const { options, onSelect = () => {} } = this.props;
     onSelect(options[i], i);
