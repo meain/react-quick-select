@@ -12,8 +12,8 @@ export type Props = {
   options: Option[];
   height?: string;
   width?: string;
-  renderer: (option: Option) => React.ReactNode;
-  trigger?: (option: Option) => React.ReactNode;
+  renderer?: (option: Option, index: number) => React.ReactNode;
+  trigger?: (option: Option, index: number) => React.ReactNode;
   onSelect?: (option: Option, index: number) => void;
 };
 type State = {
@@ -26,7 +26,7 @@ export default class QuickSelect extends React.Component<Props, State> {
     this.state = { hover: false };
   }
 
-  defaultRenderer(option: Option, trigger = false) {
+  defaultRenderer(option: Option, _index: number, trigger = false) {
     return (
       <div className={trigger ? styles.defaulttrigger : styles.defaultitem}>
         {option.label}
@@ -39,7 +39,7 @@ export default class QuickSelect extends React.Component<Props, State> {
   }
 
   onItemSelect(event: React.MouseEvent<HTMLElement>, i: number) {
-    this.setState({...this.state, hover: false})
+    this.setState({ ...this.state, hover: false });
     event.stopPropagation();
     const { options, onSelect = () => {} } = this.props;
     onSelect(options[i], i);
@@ -58,14 +58,14 @@ export default class QuickSelect extends React.Component<Props, State> {
     // const clname = updateMaxHeight(height, styles);
 
     const defaultTrigger = (option: Option) =>
-      this.defaultRenderer(option, true);
+      this.defaultRenderer(option, selected, true);
     trigger = trigger || defaultTrigger;
 
     const { hover } = this.state;
 
     const style: React.CSSProperties = {};
     if (hover) {
-      style.overflow = 'auto';
+      style.overflowY = "auto";
       style.maxHeight = height;
       if (width) style.width = width;
     }
@@ -77,7 +77,8 @@ export default class QuickSelect extends React.Component<Props, State> {
         onMouseLeave={() => this.toggleHover(false)}
       >
         <div className={styles.trigger}>
-          {trigger(options[selected]) || renderer(options[selected])}
+          {trigger(options[selected], selected) ||
+            renderer(options[selected], selected)}
         </div>
         <div className={styles.items} style={style}>
           {options.map((option, i) => (
@@ -86,7 +87,7 @@ export default class QuickSelect extends React.Component<Props, State> {
               className={styles.item}
               onClick={e => this.onItemSelect(e, i)}
             >
-              {renderer(option)}
+              {renderer(option, i)}
             </div>
           ))}
         </div>

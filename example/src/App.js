@@ -15,13 +15,33 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      number: 0,
-      color: 0
+      number: 12,
+      color: 1
     };
+
+    this.optionRenderer = this.optionRenderer.bind(this);
   }
 
-  optionRenderer(option) {
+  triggerRenderer(option) {
     return <b style={{ margin: "0 10px" }}>{option.label}</b>;
+  }
+
+  optionRenderer(option, i) {
+    const { number } = this.state;
+    let background = "white";
+    let color = "black";
+    if (number === i) {
+      background = "black";
+      color = "white";
+    }
+    return (
+      <div
+        style={{ padding: "5px 10px", background, color }}
+        className="App-option"
+      >
+        {option.label}
+      </div>
+    );
   }
 
   colorRenderer(option) {
@@ -43,7 +63,8 @@ export default class App extends Component {
       "blue",
       "yellow",
       "pink",
-      "black"
+      "gold",
+      "violet"
     ].map(color => {
       return { value: color, label: color };
     });
@@ -56,8 +77,8 @@ export default class App extends Component {
             options={numberOptions}
             selected={this.state.number}
             height="500px"
-            width="300px"
-            trigger={this.optionRenderer}
+            renderer={this.optionRenderer}
+            trigger={this.triggerRenderer}
             onSelect={(o, i) => {
               console.log(i);
               this.setState({ ...this.state, number: i });
@@ -67,7 +88,7 @@ export default class App extends Component {
           <QuickSelect
             options={colorOptions}
             selected={this.state.color}
-            trigger={this.optionRenderer}
+            trigger={this.triggerRenderer}
             renderer={this.colorRenderer}
             onSelect={(o, i) => {
               this.setState({ ...this.state, color: i });
