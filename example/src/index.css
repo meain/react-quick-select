@@ -8,6 +8,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .App {
@@ -15,10 +17,21 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
 }
 
 .App > div {
   display: flex;
+  flex-wrap: wrap;
+}
+@media only screen and (max-width: 810px) {
+  .App > div {
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 }
 
 .App-option {
