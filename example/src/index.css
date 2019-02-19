@@ -38,6 +38,7 @@ body {
   width: 100%;
   white-space: nowrap;
   word-break: keep-all;
+  text-align: left;
 }
 .App-option:hover {
   background: #f5f5f5 !important;
