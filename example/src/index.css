@@ -30,3 +30,8 @@ body {
   background: #f5f5f5 !important;
   color: black !important;
 }
+
+.bottom {
+  bottom: 50px;
+  position: absolute;
+}

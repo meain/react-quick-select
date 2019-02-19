@@ -95,6 +95,12 @@ export default class App extends Component {
             }}
           />
         </div>
+        <div className="bottom">
+          Chekout code at&nbsp;
+          <a href="https://github.com/meain/react-quick-select">
+            meain/react-quick-select
+          </a>
+        </div>
       </div>
     );
   }
