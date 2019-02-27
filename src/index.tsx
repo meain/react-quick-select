@@ -6,8 +6,9 @@ import * as React from "react";
 
 import styles from "./styles.css";
 
-export type Option = { value: string; label: string };
+export type Option = { value: any; label: string };
 export type Props = {
+  style?: React.CSSProperties;
   selected: number;
   options: Option[];
   height?: string;
@@ -47,6 +48,7 @@ export default class QuickSelect extends React.Component<Props, State> {
 
   render() {
     let {
+      style,
       options,
       selected = 0,
       renderer = this.defaultRenderer,
@@ -63,16 +65,17 @@ export default class QuickSelect extends React.Component<Props, State> {
 
     const { hover } = this.state;
 
-    const style: React.CSSProperties = {};
+    const optionsStyle: React.CSSProperties = {};
     if (hover) {
-      style.overflowY = "auto";
-      style.maxHeight = height;
-      if (width) style.width = width;
+      optionsStyle.overflowY = "auto";
+      optionsStyle.maxHeight = height;
+      if (width) optionsStyle.width = width;
     }
 
     return (
       <div
         className={styles.wrapper}
+        style={style}
         onMouseEnter={() => this.toggleHover(true)}
         onMouseLeave={() => this.toggleHover(false)}
       >
@@ -80,7 +83,7 @@ export default class QuickSelect extends React.Component<Props, State> {
           {trigger(options[selected], selected) ||
             renderer(options[selected], selected)}
         </div>
-        <div className={styles.items} style={style}>
+        <div className={styles.items} style={optionsStyle}>
           {options.map((option, i) => (
             <div
               key={i}
