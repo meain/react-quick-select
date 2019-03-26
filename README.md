@@ -54,7 +54,7 @@ class Example extends React.Component {
 }
 ```
 
-> For a more complex example check `examples/App.js`
+For a more complex example check [`examples`](https://github.com/meain/react-quick-select/tree/master/example)
 
 ## Props
 
